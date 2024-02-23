@@ -18,16 +18,17 @@ server by:
 [xtemplate]: https://github.com/infogulch/xtemplate
 [caddy]: https://caddyserver.com/
 [extending-caddy]: https://caddyserver.com/docs/extending-caddy
-[http.handlers.xtemplate]: https://caddyserver.com/download?package=github.com%2Finfogulch%2Fxtemplate%2Fcaddy
+[http.handlers.xtemplate]: https://caddyserver.com/download?package=github.com%2Finfogulch%2Fxtemplate-caddy
 
 ## Quickstart
 
 First, [Download Caddy Server with `http.handlers.xtemplate` module](http.handlers.xtemplate), or [build it yourself](#build).
 
-Write your caddy config and use the xtemplate http handler in a route block, see
-[Config](#config) for a listing of xtemplate configs. The simplest Caddy config is:
+Write your caddy config and use the xtemplate http handler in a route block. See
+[Config](#config) for a listing of xtemplate configs. The simplest Caddy config
+is:
 
-```Caddyfile
+```Caddy
 :8080
 
 route {
@@ -54,7 +55,7 @@ caddy run --config Caddyfile
 
 Here are the xtemplate configs available to a Caddyfile:
 
-```
+```Caddy
 xtemplate {
     template {                                   # Control where and how templates are loaded.
         path <string>                            # The path to the templates directory. Default: "templates".
@@ -114,3 +115,11 @@ TZ=UTC git --no-pager show --quiet --abbrev=12 --date='format-local:%Y%m%d%H%M%S
 ```
 
 </details>
+
+## Package history
+
+This package has moved several times. Here are some previous names it has been known as:
+
+* `github.com/infogulch/caddy-xtemplate` - Initial implementation to prove out the idea.
+* `github.com/infogulch/xtemplate/caddy` - Refactored xtemplate to be usable from the cli and as a Go library, split Caddy integration into a separate module in the same repo.
+* `github.com/infogulch/xtemplate-caddy` **Current package** - Caddy integration moved to its own repo, and refactored config organization. This should be the final rename 🤞.

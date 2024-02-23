@@ -2,18 +2,18 @@
 
 > [!tip]
 >
-> [xtemplate](xtemplate) is a html/template-oriented hypertext preprocessor and
+> [xtemplate][xtemplate] is a html/template-oriented hypertext preprocessor and
 > rapid application development web server. To learn about how to use it, read
 > the docs at https://github.com/infogulch/xtemplate
 
-caddy-xtemplate adapts [xtemplate](xtemplate) for use in the [Caddy](caddy) web
+caddy-xtemplate adapts [xtemplate][xtemplate] for use in the [Caddy][caddy] web
 server by:
 
-1. Registering as a [Caddy module](extending-caddy) named
-   [`http.handlers.xtemplate`](http.handlers.xtemplate) which exposes a
+1. Registering as a [Caddy module][extending-caddy] named
+   [`http.handlers.xtemplate`][http.handlers.xtemplate] which exposes a
    `caddyhttp.MiddlewareHandler` that can serve as a route handler using the
    `xtemplate` handler middleware definition.
-3. Adapts Caddyfile configuration to xtemplate Go config API for easy configuration.
+3. Adapts Caddyfile configuration to easily configure xtemplate through Caddy.
 
 [xtemplate]: https://github.com/infogulch/xtemplate
 [caddy]: https://caddyserver.com/
@@ -22,7 +22,7 @@ server by:
 
 ## Quickstart
 
-First, [Download Caddy Server with `http.handlers.xtemplate` module](http.handlers.xtemplate), or [build it yourself](#build).
+First, [Download Caddy Server with `http.handlers.xtemplate` module][http.handlers.xtemplate], or [build it yourself](#build).
 
 Write your caddy config and use the xtemplate http handler in a route block. See
 [Config](#config) for a listing of xtemplate configs. The simplest Caddy config

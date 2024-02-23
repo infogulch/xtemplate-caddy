@@ -1,0 +1,3 @@
+<title>Hello!</title>
+
+<p>Hello, {{.Req.URL.Query.Get "name" | default "World"}}!</p>

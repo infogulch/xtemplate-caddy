@@ -70,22 +70,22 @@ func (m *XTemplateModule) Provision(ctx caddy.Context) error {
 	}
 
 	if len(watchDirs) > 0 {
-		changed, halt, err := watch.WatchDirs(watchDirs, 200*time.Millisecond)
+		halt, err := watch.Watch(watchDirs, 200*time.Millisecond, log.WithGroup("fswatch"), func() bool {
+			log := log.With(slog.Group("reload", slog.Int64("current_id", m.handler.Id())))
+			temphandler, err := xtemplate.Build(&m.Config)
+			if err != nil {
+				log.LogAttrs(ctx, slog.LevelInfo, "failed to reload xtemplate", slog.Any("error", err))
+			} else {
+				m.handler, temphandler = temphandler, m.handler
+				temphandler.Cancel()
+				log.LogAttrs(ctx, slog.LevelInfo, "reloaded templates after filesystem change", slog.Int64("new_id", m.handler.Id()))
+			}
+			return true
+		})
 		if err != nil {
 			return err
 		}
 		m.halt = halt
-		watch.React(changed, halt, func() (halt bool) {
-			temphandler, err := xtemplate.Build(&m.Config)
-			if err != nil {
-				log.Info("failed to reload xtemplate", "error", err)
-				return
-			}
-			temphandler, m.handler = m.handler, temphandler
-			log.Info("reloaded templates after file changed")
-			temphandler.Cancel()
-			return
-		})
 	}
 	return nil
 }

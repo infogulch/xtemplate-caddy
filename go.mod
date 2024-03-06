@@ -1,11 +1,11 @@
 module github.com/infogulch/xtemplate-caddy
 
-go 1.22.0
+go 1.22.1
 
 require (
 	github.com/caddyserver/caddy/v2 v2.7.4
-	github.com/infogulch/watch v0.1.3
-	github.com/infogulch/xtemplate v0.3.1
+	github.com/infogulch/watch v0.2.0
+	github.com/infogulch/xtemplate v0.3.2
 	go.uber.org/zap/exp v0.2.0
 	golang.org/x/exp v0.0.0-20240222234643-814bf88cf225
 )
@@ -35,6 +35,7 @@ require (
 	github.com/dgryski/go-farm v0.0.0-20200201041132-a6ae2369ad13 // indirect
 	github.com/dlclark/regexp2 v1.10.0 // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect
+	github.com/felixge/httpsnoop v1.0.4 // indirect
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
 	github.com/go-kit/kit v0.10.0 // indirect
 	github.com/go-logfmt/logfmt v0.5.1 // indirect
@@ -110,7 +111,7 @@ require (
 	golang.org/x/crypto v0.19.0 // indirect
 	golang.org/x/mod v0.15.0 // indirect
 	golang.org/x/net v0.21.0 // indirect
-	golang.org/x/sys v0.17.0 // indirect
+	golang.org/x/sys v0.18.0 // indirect
 	golang.org/x/term v0.17.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
 	golang.org/x/tools v0.18.0 // indirect

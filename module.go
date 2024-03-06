@@ -50,13 +50,14 @@ func (m *XTemplateModule) Validate() error {
 
 // Provision provisions t. Implements caddy.Provisioner.
 func (m *XTemplateModule) Provision(ctx caddy.Context) error {
+	m.Config.FillDefaults()
+
 	// Wrap zap logger into a slog logger for xtemplate
 	log := slog.New(zapslog.NewHandler(ctx.Logger().Core(), nil)).WithGroup("xtemplate-caddy")
 
 	m.Logger = log
-
 	var err error
-	m.handler, err = xtemplate.Build(&m.Config)
+	m.handler, err = xtemplate.Build(m.Config)
 	if err != nil {
 		return err
 	}
@@ -72,7 +73,7 @@ func (m *XTemplateModule) Provision(ctx caddy.Context) error {
 	if len(watchDirs) > 0 {
 		halt, err := watch.Watch(watchDirs, 200*time.Millisecond, log.WithGroup("fswatch"), func() bool {
 			log := log.With(slog.Group("reload", slog.Int64("current_id", m.handler.Id())))
-			temphandler, err := xtemplate.Build(&m.Config)
+			temphandler, err := xtemplate.Build(m.Config)
 			if err != nil {
 				log.LogAttrs(ctx, slog.LevelInfo, "failed to reload xtemplate", slog.Any("error", err))
 			} else {

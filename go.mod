@@ -5,7 +5,7 @@ go 1.22.1
 require (
 	github.com/caddyserver/caddy/v2 v2.7.4
 	github.com/infogulch/watch v0.2.0
-	github.com/infogulch/xtemplate v0.3.2
+	github.com/infogulch/xtemplate v0.3.3
 	go.uber.org/zap/exp v0.2.0
 	golang.org/x/exp v0.0.0-20240222234643-814bf88cf225
 )
@@ -97,6 +97,8 @@ require (
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/stoewer/go-strcase v1.2.0 // indirect
 	github.com/tailscale/tscert v0.0.0-20230509043813-4e9cb4f2b4ad // indirect
+	github.com/tdewolff/minify/v2 v2.20.18 // indirect
+	github.com/tdewolff/parse/v2 v2.7.12 // indirect
 	github.com/urfave/cli v1.22.14 // indirect
 	github.com/yuin/goldmark v1.7.0 // indirect
 	github.com/yuin/goldmark-highlighting/v2 v2.0.0-20230729083705-37449abec8cc // indirect

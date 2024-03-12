@@ -362,8 +362,8 @@ github.com/inconshreveable/mousetrap v1.1.0/go.mod h1:vpF70FUmC8bwa3OWnCshd2FqLf
 github.com/influxdata/influxdb1-client v0.0.0-20191209144304-8bf82d3c094d/go.mod h1:qj24IKcXYK6Iy9ceXlo3Tc+vtHo9lIhSX5JddghvEPo=
 github.com/infogulch/watch v0.2.0 h1:slnC/9HWtpI2pWAbJvX4VwGrCDw03SKJU0DBu0xQjbQ=
 github.com/infogulch/watch v0.2.0/go.mod h1:FAtXJmlWcqqbiqA/M97ZS0ZM7XKgzypk3nVJZxSO6fI=
-github.com/infogulch/xtemplate v0.3.3 h1:1bgw/FhS+U01GJd0oEHHHv+0bc8oaQy0/P7kDy6gpOs=
-github.com/infogulch/xtemplate v0.3.3/go.mod h1:oocS1cCx6SaBadmLDlcIo4UTY9MhaHVnjZaiP72tZ4c=
+github.com/infogulch/xtemplate v0.4.0 h1:kLgRJek8/GEc1JSRnbQYOQQpKSjcjSpyqjsMjZCU2II=
+github.com/infogulch/xtemplate v0.4.0/go.mod h1:uE53XcLzIL4528zcZZCZjI/wwHWG+E0mioPpuqHL0Ik=
 github.com/jackc/chunkreader v1.0.0/go.mod h1:RT6O25fNZIuasFJRyZ4R/Y2BbhasbmZXF9QQ7T3kePo=
 github.com/jackc/chunkreader/v2 v2.0.0/go.mod h1:odVSm741yZoC3dpHEUXIqA9tQRhFrgOHwnPIn9lDKlk=
 github.com/jackc/chunkreader/v2 v2.0.1 h1:i+RDz65UE+mmpjTfyz0MoVTnzeYxroil2G82ki7MGG8=

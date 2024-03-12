@@ -1,6 +1,7 @@
 package xtemplate_caddy
 
 import (
+	"context"
 	"database/sql"
 	"fmt"
 	"net/http"
@@ -36,8 +37,8 @@ type XTemplateModule struct {
 
 	FuncsModules []string `json:"funcs_modules,omitempty"`
 
-	handler xtemplate.CancelHandler
-	halt    chan<- struct{}
+	handler http.Handler
+	cancel  func()
 }
 
 // Validate ensures t has a valid configuration. Implements caddy.Validator.
@@ -50,17 +51,19 @@ func (m *XTemplateModule) Validate() error {
 
 // Provision provisions t. Implements caddy.Provisioner.
 func (m *XTemplateModule) Provision(ctx caddy.Context) error {
-	m.Config.FillDefaults()
-
 	// Wrap zap logger into a slog logger for xtemplate
 	log := slog.New(zapslog.NewHandler(ctx.Logger().Core(), nil)).WithGroup("xtemplate-caddy")
 
 	m.Logger = log
-	var err error
-	m.handler, err = xtemplate.Build(m.Config)
+	m.Config.Defaults()
+	m.Config.Ctx, m.cancel = context.WithCancel(ctx.Context)
+
+	server, err := m.Config.Server()
 	if err != nil {
+		m.cancel()
 		return err
 	}
+	m.handler = server.Handler()
 
 	var watchDirs []string
 	if m.WatchTemplatePath {
@@ -72,21 +75,22 @@ func (m *XTemplateModule) Provision(ctx caddy.Context) error {
 
 	if len(watchDirs) > 0 {
 		halt, err := watch.Watch(watchDirs, 200*time.Millisecond, log.WithGroup("fswatch"), func() bool {
-			log := log.With(slog.Group("reload", slog.Int64("current_id", m.handler.Id())))
-			temphandler, err := xtemplate.Build(m.Config)
+			err := server.Reload()
 			if err != nil {
-				log.LogAttrs(ctx, slog.LevelInfo, "failed to reload xtemplate", slog.Any("error", err))
-			} else {
-				m.handler, temphandler = temphandler, m.handler
-				temphandler.Cancel()
-				log.LogAttrs(ctx, slog.LevelInfo, "reloaded templates after filesystem change", slog.Int64("new_id", m.handler.Id()))
+				log.Error("failed to reload xtemplate server", slog.Any("reload_error", err))
 			}
 			return true
 		})
 		if err != nil {
 			return err
 		}
-		m.halt = halt
+		cancel := m.cancel
+		m.cancel = func() {
+			close(halt)
+			if cancel != nil {
+				cancel()
+			}
+		}
 	}
 	return nil
 }
@@ -98,15 +102,7 @@ func (m *XTemplateModule) ServeHTTP(w http.ResponseWriter, r *http.Request, _ ca
 
 // Cleanup discards resources held by t. Implements caddy.CleanerUpper.
 func (m *XTemplateModule) Cleanup() error {
-	if m.halt != nil {
-		m.halt <- struct{}{}
-		close(m.halt)
-		m.halt = nil
-	}
-	if m.handler != nil {
-		m.handler.Cancel()
-		m.handler = nil
-	}
+	m.cancel()
 	return nil
 }
 

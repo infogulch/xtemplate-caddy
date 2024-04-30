@@ -116,13 +116,13 @@ Create a go module `go mod init <modname>` with a `main.go` like this:
 package main
 
 import (
-	caddycmd "github.com/caddyserver/caddy/v2/cmd"
+    caddycmd "github.com/caddyserver/caddy/v2/cmd"
 
-	_ "github.com/infogulch/xtemplate-caddy"
+    _ "github.com/infogulch/xtemplate-caddy"
 
     // Add xtemplate dot providers:
-	_ "github.com/infogulch/xtemplate/providers"
-	_ "github.com/infogulch/xtemplate/providers/nats"
+    _ "github.com/infogulch/xtemplate/providers"
+    _ "github.com/infogulch/xtemplate/providers/nats"
 
     // Add other caddy modules:
     // _ "github.com/greenpau/caddy-security"

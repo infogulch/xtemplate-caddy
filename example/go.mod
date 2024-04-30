@@ -5,10 +5,8 @@ go 1.22.1
 require (
 	github.com/caddyserver/caddy/v2 v2.7.6-0.20240427195100-87c7127c2869
 	github.com/infogulch/xtemplate v0.6.5
-	github.com/infogulch/xtemplate-caddy v0.2.0
+	github.com/infogulch/xtemplate-caddy v0.2.1
 )
-
-replace github.com/imdario/mergo => github.com/imdario/mergo v0.3.16
 
 require (
 	filippo.io/edwards25519 v1.1.0 // indirect
@@ -52,7 +50,7 @@ require (
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/gorilla/css v1.0.1 // indirect
 	github.com/huandu/xstrings v1.4.0 // indirect
-	github.com/imdario/mergo v1.0.0 // indirect
+	github.com/imdario/mergo v0.3.16 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/infogulch/watch v0.2.0 // indirect
 	github.com/jackc/chunkreader/v2 v2.0.1 // indirect

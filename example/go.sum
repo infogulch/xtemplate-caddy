@@ -207,6 +207,7 @@ github.com/hexops/gotextdiff v1.0.3/go.mod h1:pSWU5MAI3yDq+fZBTazCSJysOMbxWL1BSo
 github.com/huandu/xstrings v1.3.3/go.mod h1:y5/lhBue+AyNmUVz9RLU9xbLR0o4KIIExikq4ovT0aE=
 github.com/huandu/xstrings v1.4.0 h1:D17IlohoQq4UcpqD7fDk80P7l+lwAmlFaBHgOipl2FU=
 github.com/huandu/xstrings v1.4.0/go.mod h1:y5/lhBue+AyNmUVz9RLU9xbLR0o4KIIExikq4ovT0aE=
+github.com/imdario/mergo v0.3.11/go.mod h1:jmQim1M+e3UYxmgPu/WyfjB3N3VflVyUjjjwH0dnCYA=
 github.com/imdario/mergo v0.3.16 h1:wwQJbIsHYGMUyLSPrEq1CT16AhnhNJQ51+4fdHUnCl4=
 github.com/imdario/mergo v0.3.16/go.mod h1:WBLT9ZmE3lPoWsEzCh9LPo3TiwVN+ZKEjmz+hD27ysY=
 github.com/inconshreveable/mousetrap v1.0.0/go.mod h1:PxqpIevigyE2G7u3NXJIT2ANytuPF1OarO4DADm73n8=
@@ -216,8 +217,8 @@ github.com/infogulch/watch v0.2.0 h1:slnC/9HWtpI2pWAbJvX4VwGrCDw03SKJU0DBu0xQjbQ
 github.com/infogulch/watch v0.2.0/go.mod h1:FAtXJmlWcqqbiqA/M97ZS0ZM7XKgzypk3nVJZxSO6fI=
 github.com/infogulch/xtemplate v0.6.5 h1:a/HnGTwjDK+aqn/Nn0ItYG21g2Pt0lqzDTJd+AkiyGg=
 github.com/infogulch/xtemplate v0.6.5/go.mod h1:V+mlUfgcgTOQTBC4K16ljjuyGDEqPKw+KWKfj4pO9vY=
-github.com/infogulch/xtemplate-caddy v0.2.0 h1:ir1lMWM3IQSAwiWS4srD5qEyoRgF3yV+u2qGDDOIYjc=
-github.com/infogulch/xtemplate-caddy v0.2.0/go.mod h1:4t0zaAbtYf6bs5KfAQ7FnudmZgbMv+SFRBYL8w8CNGE=
+github.com/infogulch/xtemplate-caddy v0.2.1 h1:H/ao3k8Ef95rFJZ4MrVeBy0l0WCYEvQx5xeP8UUuIno=
+github.com/infogulch/xtemplate-caddy v0.2.1/go.mod h1:6sltaSMB7+pTh7JL33M8tzF99B4bHGO2mLWn0n1uUeA=
 github.com/jackc/chunkreader v1.0.0/go.mod h1:RT6O25fNZIuasFJRyZ4R/Y2BbhasbmZXF9QQ7T3kePo=
 github.com/jackc/chunkreader/v2 v2.0.0/go.mod h1:odVSm741yZoC3dpHEUXIqA9tQRhFrgOHwnPIn9lDKlk=
 github.com/jackc/chunkreader/v2 v2.0.1 h1:i+RDz65UE+mmpjTfyz0MoVTnzeYxroil2G82ki7MGG8=
@@ -634,6 +635,7 @@ gopkg.in/natefinch/lumberjack.v2 v2.2.1 h1:bBRl1b0OH9s/DuPhuXpNl+VtCaJXFZ5/uEFST
 gopkg.in/natefinch/lumberjack.v2 v2.2.1/go.mod h1:YD8tP3GAjkrDg1eZH7EGmyESg/lsYskCTPBJVb9jqSc=
 gopkg.in/yaml.v1 v1.0.0-20140924161607-9f9df34309c0/go.mod h1:WDnlLJ4WF5VGsH/HVa3CI79GS0ol3YnhVnKP89i0kNg=
 gopkg.in/yaml.v2 v2.2.2/go.mod h1:hI93XBmqTisBFMUTm0b8Fm+jr3Dg1NNxqwp+5A1VGuI=
+gopkg.in/yaml.v2 v2.3.0/go.mod h1:hI93XBmqTisBFMUTm0b8Fm+jr3Dg1NNxqwp+5A1VGuI=
 gopkg.in/yaml.v2 v2.4.0/go.mod h1:RDklbk79AGWmwhnvt/jBztapEOGDOx6ZbXqjP6csGnQ=
 gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c/go.mod h1:K4uyk7z7BCEPqu6E+C64Yfv1cQ7kz7rIZviUmN+EgEM=
 gopkg.in/yaml.v3 v3.0.1 h1:fxVm/GzAzEWqLHuvctI91KS9hhNmmWOoWu0XTYJS7CA=

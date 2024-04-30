@@ -85,11 +85,11 @@ the directory root. Examples:
 
 ```shell
 # build a caddy executable with the latest version of xtemplate-caddy from github:
-xcaddy build --with github.com/infogulch/xtemplate-caddy
+xcaddy build 87c7127c2869 --with github.com/infogulch/xtemplate-caddy
 
 # build a caddy executable and override the xtemplate module with your
 # modifications in the current directory:
-xcaddy build --with github.com/infogulch/xtemplate-caddy=.
+xcaddy build 87c7127c2869 --with github.com/infogulch/xtemplate-caddy=.
 
 # build with CGO in order to use the sqlite3 db driver
 CGO_ENABLED=1 xcaddy build --with github.com/infogulch/xtemplate-caddy

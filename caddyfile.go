@@ -23,62 +23,17 @@ func parseCaddyfile(h httpcaddyfile.Helper) (caddyhttp.MiddlewareHandler, error)
 	for h.Next() {
 		for h.NextBlock(0) {
 			switch h.Val() {
-			case "template":
-				for nesting := h.Nesting(); h.NextBlock(nesting); {
-					switch h.Val() {
-					case "path":
-						if !h.AllArgs(&t.Template.Path) {
-							return nil, h.ArgErr()
-						}
-					case "template_extension":
-						if !h.AllArgs(&t.Template.TemplateExtension) {
-							return nil, h.ArgErr()
-						}
-					case "delimiters":
-						if !h.AllArgs(&t.Template.Delimiters.Left, &t.Template.Delimiters.Right) {
-							return nil, h.ArgErr()
-						}
-					default:
-						return nil, h.Errf("unknown config option")
-					}
+			case "templates_path":
+				if !h.AllArgs(&t.TemplatesDir) {
+					return nil, h.ArgErr()
 				}
-			case "context":
-				for nesting := h.Nesting(); h.NextBlock(nesting); {
-					switch h.Val() {
-					case "path":
-						if !h.AllArgs(&t.Context.Path) {
-							return nil, h.ArgErr()
-						}
-					default:
-						return nil, h.Errf("unknown config option")
-					}
+			case "template_extension":
+				if !h.AllArgs(&t.TemplateExtension) {
+					return nil, h.ArgErr()
 				}
-			case "database":
-				for nesting := h.Nesting(); h.NextBlock(nesting); {
-					switch h.Val() {
-					case "driver":
-						if !h.AllArgs(&t.Database.Driver) {
-							return nil, h.ArgErr()
-						}
-					case "connstr":
-						if !h.AllArgs(&t.Database.Connstr) {
-							return nil, h.ArgErr()
-						}
-					default:
-						return nil, h.Errf("unknown config option")
-					}
-				}
-			case "config":
-				for nesting := h.Nesting(); h.NextBlock(nesting); {
-					var key, val string
-					key = h.Val()
-					if _, ok := t.UserConfig[key]; ok {
-						return nil, h.Errf("config key '%s' repeated", key)
-					}
-					if !h.Args(&val) {
-						return nil, h.ArgErr()
-					}
-					t.UserConfig[key] = val
+			case "delimiters":
+				if !h.AllArgs(&t.LDelim, &t.RDelim) {
+					return nil, h.ArgErr()
 				}
 			case "funcs_modules":
 				t.FuncsModules = h.RemainingArgs()

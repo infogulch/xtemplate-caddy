@@ -2,8 +2,6 @@ package xtemplate_caddy
 
 import (
 	"context"
-	"database/sql"
-	"fmt"
 	"net/http"
 	"time"
 
@@ -14,7 +12,6 @@ import (
 	"github.com/infogulch/watch"
 	"github.com/infogulch/xtemplate"
 	"go.uber.org/zap/exp/zapslog"
-	"golang.org/x/exp/slices"
 )
 
 func init() {
@@ -43,9 +40,7 @@ type XTemplateModule struct {
 
 // Validate ensures t has a valid configuration. Implements caddy.Validator.
 func (m *XTemplateModule) Validate() error {
-	if m.Database.Driver != "" && slices.Index(sql.Drivers(), m.Database.Driver) == -1 {
-		return fmt.Errorf("database driver '%s' does not exist", m.Database.Driver)
-	}
+	// todo: process FuncsModules
 	return nil
 }
 
@@ -65,16 +60,8 @@ func (m *XTemplateModule) Provision(ctx caddy.Context) error {
 	}
 	m.handler = server.Handler()
 
-	var watchDirs []string
 	if m.WatchTemplatePath {
-		watchDirs = append(watchDirs, m.Template.Path)
-	}
-	if m.WatchContextPath {
-		watchDirs = append(watchDirs, m.Context.Path)
-	}
-
-	if len(watchDirs) > 0 {
-		halt, err := watch.Watch(watchDirs, 200*time.Millisecond, log.WithGroup("fswatch"), func() bool {
+		halt, err := watch.Watch([]string{m.TemplatesDir}, 200*time.Millisecond, log.WithGroup("fswatch"), func() bool {
 			err := server.Reload()
 			if err != nil {
 				log.Error("failed to reload xtemplate server", slog.Any("reload_error", err))

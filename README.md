@@ -36,7 +36,7 @@ route {
 }
 ```
 
-Place `.html` files in the directory specified by the `xtemplate.template.path`
+Place `.html` files in the directory specified by the `xtemplate.templates_dir`
 key in your caddy config (default "templates"). The config above would load
 templates from the `./templates` directory, relative to the current working
 directory.
@@ -57,28 +57,12 @@ Here are the xtemplate configs available to a Caddyfile:
 
 ```Caddy
 xtemplate {
-    template {                                   # Control where and how templates are loaded.
-        path <string>                            # The path to the templates directory. Default: "templates".
-        template_extension <string>              # File extension to search for to find template files. Default ".html".
-        delimiters <Left:string> <Right:string>  # The template action delimiters, default "{{" and "}}".
-    }
-
-    context {           # Control where the templates may have dynamic access the filesystem.
-        path <string>   # Path to a directory to give dynamic access to templates. No access if empty, "". Default: ""
-    }
+    templates_path <string>                            # The path to the templates directory. Default: "templates".
+    template_extension <string>              # File extension to search for to find template files. Default ".html".
+    delimiters <Left:string> <Right:string>  # The template action delimiters, default "{{" and "}}".
 
     watch_template_path <bool>   # Reloads templates if anything in template path changes. Default: true
     watch_context_path <bool>    # Reloads templates if anything in context path changes. Default: false
-
-    database {                        # Control whether a db is opened.
-        driver <driver>               # Driver and connstr are passed directly to sql.Open
-        connstr <connection string>   # Check your sql driver for connstr format
-    }
-
-    config {         # A map of key value pairs, accessible in the template as .Config
-      key1 value1    # Keys must be unique
-      key2 value2
-    }
 
     funcs_modules <mod1> <mod2>  # A list of caddy modules under the `xtemplate.funcs.*`
                                  # namespace that implement the FuncsProvider interface,
@@ -86,7 +70,15 @@ xtemplate {
 }
 ```
 
+> [!NOTE]
+>
+> `xtemplate-caddy` currently does not support configuring the dot context in
+> the Caddyfile format. To configure the dot context you must use Caddy's json
+> configuration.
+
 ## Build
+
+### `xcaddy` CLI
 
 To build xtemplate_caddy locally, install [`xcaddy`](xcaddy), then build from
 the directory root. Examples:
@@ -115,6 +107,33 @@ TZ=UTC git --no-pager show --quiet --abbrev=12 --date='format-local:%Y%m%d%H%M%S
 ```
 
 </details>
+
+### A Go module
+
+Create a go module `go mod init <modname>` with a `main.go` like this:
+
+```go
+package main
+
+import (
+	caddycmd "github.com/caddyserver/caddy/v2/cmd"
+
+	_ "github.com/infogulch/xtemplate-caddy"
+
+    // Add xtemplate dot providers:
+	_ "github.com/infogulch/xtemplate/providers"
+	_ "github.com/infogulch/xtemplate/providers/nats"
+
+    // Add other caddy modules:
+    // _ "github.com/greenpau/caddy-security"
+)
+
+func main() {
+	caddycmd.Main()
+}
+```
+
+Compile it with `go build -o caddy .`, then run with `./caddy run --config Caddyfile`
 
 ## Package history
 

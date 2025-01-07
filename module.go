@@ -47,7 +47,7 @@ func (m *XTemplateModule) Validate() error {
 // Provision provisions t. Implements caddy.Provisioner.
 func (m *XTemplateModule) Provision(ctx caddy.Context) error {
 	// Wrap zap logger into a slog logger for xtemplate
-	log := slog.New(zapslog.NewHandler(ctx.Logger().Core(), nil)).WithGroup("xtemplate-caddy")
+	log := slog.New(zapslog.NewHandler(ctx.Logger().Core())).WithGroup("xtemplate-caddy")
 
 	m.Logger = log
 	m.Config.Defaults()
